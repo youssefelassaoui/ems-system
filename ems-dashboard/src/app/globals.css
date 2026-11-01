@@ -1,0 +1,298 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Design tokens — a calm, premium blue & white system                 */
+/* ------------------------------------------------------------------ */
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Plus Jakarta Sans Variable", "Inter Variable", ui-sans-serif, sans-serif;
+
+  --color-brand-50: #f1f6ff;
+  --color-brand-100: #e2ecff;
+  --color-brand-200: #c5d8ff;
+  --color-brand-300: #96b8ff;
+  --color-brand-400: #5f94ff;
+  --color-brand-500: #2f6bff;
+  --color-brand-600: #1952eb;
+  --color-brand-700: #1541c0;
+  --color-brand-800: #14369a;
+  --color-brand-900: #132f78;
+  --color-brand-950: #0b1d4d;
+
+  --color-ink-50: #f5f8fe;
+  --color-ink-100: #eaf0fa;
+  --color-ink-200: #d9e2f2;
+  --color-ink-300: #b9c6df;
+  --color-ink-400: #8a9bbd;
+  --color-ink-500: #62759c;
+  --color-ink-600: #455a84;
+  --color-ink-700: #2d4170;
+  --color-ink-800: #1a2c58;
+  --color-ink-900: #0d1b3e;
+
+  --color-line: #e4ebf7;
+  --color-canvas: #f4f8ff;
+
+  --shadow-card:
+    0 1px 2px rgb(16 42 112 / 0.04), 0 14px 34px -14px rgb(21 65 192 / 0.16);
+  --shadow-soft: 0 1px 2px rgb(16 42 112 / 0.05), 0 4px 14px -6px rgb(21 65 192 / 0.12);
+  --shadow-glow: 0 18px 44px -18px rgb(25 82 235 / 0.55);
+
+  --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-pop: pop 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      scale: 0.96;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.55;
+    }
+    80%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Accent scopes                                                       */
+/* Each energy source has its own colour. Wrapping a page or a widget  */
+/* in data-accent="…" re-maps the brand ramp for everything inside it, */
+/* so icon tiles, bars, badges, rings and hover states all follow.     */
+/* ------------------------------------------------------------------ */
+:root {
+  --accent-rgb: 25 82 235;
+}
+
+[data-accent="load"] {
+  --accent-rgb: 25 82 235;
+  --color-brand-50: #f1f6ff;
+  --color-brand-100: #e2ecff;
+  --color-brand-200: #c5d8ff;
+  --color-brand-300: #96b8ff;
+  --color-brand-400: #5f94ff;
+  --color-brand-500: #2f6bff;
+  --color-brand-600: #1952eb;
+  --color-brand-700: #1541c0;
+  --color-brand-800: #14369a;
+  --color-brand-900: #132f78;
+  --color-brand-950: #0b1d4d;
+}
+
+/* Solar PV — sun amber → orange */
+[data-accent="solar"] {
+  --accent-rgb: 240 138 11;
+  --color-brand-50: #fff8ea;
+  --color-brand-100: #ffeec8;
+  --color-brand-200: #ffdb92;
+  --color-brand-300: #ffc359;
+  --color-brand-400: #ffa82d;
+  --color-brand-500: #f48b0a;
+  --color-brand-600: #dc6a04;
+  --color-brand-700: #b24d08;
+  --color-brand-800: #8f3b0a;
+  --color-brand-900: #75310c;
+  --color-brand-950: #421803;
+}
+
+/* Battery storage (and anything "eco") — green */
+[data-accent="battery"],
+[data-accent="eco"] {
+  --accent-rgb: 18 168 116;
+  --color-brand-50: #effcf6;
+  --color-brand-100: #d3f6e5;
+  --color-brand-200: #a9ebcd;
+  --color-brand-300: #72dbae;
+  --color-brand-400: #38c58a;
+  --color-brand-500: #12a874;
+  --color-brand-600: #0a8c61;
+  --color-brand-700: #0a714f;
+  --color-brand-800: #0b5a40;
+  --color-brand-900: #0a4a35;
+  --color-brand-950: #042b1f;
+}
+
+/* Utility grid — network violet */
+[data-accent="grid"] {
+  --accent-rgb: 133 89 245;
+  --color-brand-50: #f6f4ff;
+  --color-brand-100: #ede9ff;
+  --color-brand-200: #ddd5ff;
+  --color-brand-300: #c4b6ff;
+  --color-brand-400: #a68bff;
+  --color-brand-500: #8559f5;
+  --color-brand-600: #6f3fe6;
+  --color-brand-700: #5b31c8;
+  --color-brand-800: #4a2aa0;
+  --color-brand-900: #3c267e;
+  --color-brand-950: #26164f;
+}
+
+/* Shadows that take the colour of the surrounding accent. */
+@utility shadow-accent-glow {
+  box-shadow: 0 18px 44px -18px rgb(var(--accent-rgb) / 0.55);
+}
+@utility shadow-accent-lift {
+  box-shadow: 0 22px 48px -18px rgb(var(--accent-rgb) / 0.55);
+}
+@utility shadow-accent-card {
+  box-shadow:
+    0 1px 2px rgb(16 42 112 / 0.04),
+    0 14px 34px -14px rgb(var(--accent-rgb) / 0.2);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-canvas);
+  background-image:
+    radial-gradient(900px 520px at 8% -8%, rgb(47 107 255 / 0.1), transparent 70%),
+    radial-gradient(760px 480px at 100% 0%, rgb(56 189 248 / 0.1), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, var(--color-canvas) 380px);
+  background-repeat: no-repeat;
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01", "tnum";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-950);
+}
+
+/* Keyboard focus — brand blue instead of the browser default */
+:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 2px;
+}
+[role="tab"]:focus-visible {
+  outline-offset: 0;
+}
+
+/* Elegant, thin scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-200) transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-200);
+  border-radius: 999px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "tnum";
+  letter-spacing: -0.02em;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Range input (time scrubber) */
+input[type="range"].scrubber {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-brand-500) var(--progress, 0%),
+    var(--color-brand-100) var(--progress, 0%)
+  );
+  outline: none;
+}
+input[type="range"].scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid var(--color-brand-600);
+  box-shadow: 0 2px 8px rgb(25 82 235 / 0.35);
+  cursor: grab;
+}
+input[type="range"].scrubber::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid var(--color-brand-600);
+  box-shadow: 0 2px 8px rgb(25 82 235 / 0.35);
+  cursor: grab;
+}
+input[type="range"].scrubber:disabled {
+  opacity: 0.45;
+}
+
+/* Recharts polish */
+.recharts-surface {
+  overflow: visible;
+}
+.recharts-cartesian-axis-tick-value {
+  font-variant-numeric: tabular-nums;
+}
+.recharts-tooltip-cursor {
+  stroke: var(--color-brand-300);
+}
+
+/* Staggered entrance helper */
+.enter {
+  animation: var(--animate-fade-up);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
