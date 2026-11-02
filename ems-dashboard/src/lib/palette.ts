@@ -5,12 +5,13 @@
  *   battery → storage green
  *   grid    → network violet
  *   load    → campus blue (also the brand colour of the interface itself)
+ *   dust    → sand, for module soiling
  *
  * Charts and the 3D scene read the hex values below. Tailwind surfaces use the matching
  * `data-accent` scopes in `globals.css`, which re-map the `brand-*` ramp for everything inside.
  */
 
-export type EnergyKey = "solar" | "battery" | "grid" | "load";
+export type EnergyKey = "solar" | "battery" | "grid" | "load" | "dust";
 
 export interface EnergyTone {
   label: string;
@@ -52,6 +53,13 @@ export const ENERGY: Record<EnergyKey, EnergyTone> = {
     soft: "#96b8ff",
     deep: "#1541c0",
     gradient: "linear-gradient(135deg,#7eb0ff,#2f6bff)",
+  },
+  dust: {
+    label: "Soiling",
+    main: "#b7834a",
+    soft: "#dcb98a",
+    deep: "#7f5431",
+    gradient: "linear-gradient(135deg,#d9b27a,#9c6a3a)",
   },
 };
 

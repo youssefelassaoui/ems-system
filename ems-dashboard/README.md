@@ -15,6 +15,7 @@ tabular numerals for every live figure.
 | Battery     | green  | storage KPI, battery page, SOC, charging, LED bars |
 | Grid        | violet | grid KPI, grid page, import / export, pylon and transformer |
 | Campus load | blue   | consumption, buildings, load curves (also the platform's brand colour) |
+| Soiling     | sand   | soiling page, dust on the 3D module and the module map |
 
 Tariff windows use green (off-peak) / amber (day) / red (peak); weather icons follow the condition.
 
@@ -22,7 +23,7 @@ How it works:
 
 - `src/lib/palette.ts` holds the hex values for everything that cannot read CSS (Three.js, Recharts) —
   `ENERGY`, `ASSET_ACCENT`, `TARIFF_COLOR` and `CHART`.
-- In `src/app/globals.css`, an element with `data-accent="solar | battery | grid | load"` (or `eco`, an
+- In `src/app/globals.css`, an element with `data-accent="solar | battery | grid | load | dust"` (or `eco`, an
   alias of the battery green) re-maps the whole `brand-*` ramp inside it. Any component that uses
   `brand-*` utilities (cards, badges, gauges, chips…) therefore recolours itself when it is wrapped in a scope.
 - To change a colour, edit the ramp in `globals.css` **and** the matching entry in `palette.ts`.
@@ -33,6 +34,7 @@ How it works:
 | ------------- | ------------- |
 | `/`           | **Overview** — compact KPI strip and a full-height interactive **3D EMS model** (PV ⇄ battery ⇄ grid ⇄ campus load, animated flows that follow real-time data). **Hover** the PV field, the battery bank or the grid connection to get a static fact sheet; **click** one to open its detail page (on touch: tap once for the fact sheet, tap again to open). Below the fold: power balance, energy mix, autonomy & CO₂, daily power profile, system events, PV fleet table. |
 | `/production` | **Energy production** — fleet KPIs, stacked power / cumulative-energy chart (all systems or a single one, measured vs forecast vs clear-sky), one card per PV system with real-time power, load gauge, today’s cumulative energy, 30-day and lifetime yield, performance ratio, specific yield, capacity factor, efficiency, irradiance, module temperature, inverter efficiency, availability — and its **configuration** (module technology, number of modules, strings and inverters), plus a performance comparison and a fleet configuration table. |
+| `/soiling`    | **Module soiling** — fleet soiling, energy lost to dust and cleaning due; chips to pick a PV system; its **structure** (inverters → strings → modules) as a clickable module map tinted by each module's soiling; the selected module in a large **3D view** whose dust layer matches the measured loss (a faint haze at 1–2 %, a heavy brown film above 8 %, bird droppings where present, a "clean preview" toggle); a 30-day soiling chart (system, module, fleet, rain / sand-wind / cleaning events, 5 % threshold) and a cleaning plan. |
 | `/battery`    | **Battery storage** — state of charge, power exchange, throughput and health, a dual-axis power / SOC chart with the off-peak window and the usable SOC band, one card per battery unit (SOC, temperature, state of health, cycles) and the dispatch strategy. |
 | `/grid`       | **Grid connection** — live import / export, voltage, frequency and power factor, a signed import / export chart against the campus load, the tariff timeline (off-peak, day, peak) with energy per window, and a carbon-intensity card. |
 | `/forecast`   | **Weather & PV forecast** — live conditions with sun path, solar resource (GHI/DNI/DHI), 7-day outlook, hourly PV forecast with P10–P90 range, irradiance / cloud / temperature / precipitation charts, hourly strip, planning insights and forecast-accuracy tracking. |
@@ -80,16 +82,21 @@ The top bar controls the simulated clock:
    to your SCADA, MQTT or REST source and keep the shapes — no component changes required.
 3. **Weather** — `src/lib/weather.ts` exposes `getForecast`, `getCurrentConditions` and `getAccuracyHistory`.
    Swap them for a provider such as Open-Meteo, Solcast or Meteomatics.
+4. **Soiling** — `src/lib/soiling.ts` simulates dust per system (daily rate, last cleaning, rain wash-off,
+   sand-wind events) and per module (windward strings, string ends, bird droppings). Replace
+   `getSystemSoiling` / `getModuleSoiling` with soiling-station or IV-curve measurements.
 
 ## Project structure
 
 ```
 src/
-  app/                    App Router pages (/, /production, /battery, /grid, /forecast) + global styles
+  app/                    App Router pages (/, /production, /soiling, /battery, /grid, /forecast) + global styles
   components/
     ems/                  3D digital twin (React Three Fiber), label chips, hover / tap fact-sheet card
       scene/              platform, PV field, battery bank, grid pylon, campus, EMS hub, flow lines,
                           hotspots (invisible hit boxes + ground highlight for PV / battery / grid)
+    soiling/              Soiling page (summary, system chips, module map, 3D module scene + canvas
+                          textures per technology, soiling chart, cleaning plan)
     battery/              Battery page (summary, chart, unit cards, strategy)
     grid/                 Grid page (summary, chart, tariff timeline, carbon)
     overview/             Overview page cards
@@ -99,7 +106,7 @@ src/
     ui/                   Design-system primitives (card, badge, gauges, sparkline, tooltip…) and
                           kpi-tile.tsx, the compact KPI tile shared by the top strip of every page
   hooks/                  Day-series sampling for sparklines
-  lib/                    Site config, PV fleet, simulation, weather model, formatting,
+  lib/                    Site config, PV fleet, simulation, weather model, soiling model, formatting,
                           palette.ts (energy colours for 3D and charts),
                           assets.ts (fact-sheet content, battery units, tariff windows for PV / battery / grid)
   providers/              Simulated clock + snapshot context

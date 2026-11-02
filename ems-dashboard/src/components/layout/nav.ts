@@ -3,6 +3,7 @@ import {
   CloudSun,
   LayoutDashboard,
   PlugZap,
+  SprayCan,
   Sun,
   type LucideIcon,
 } from "lucide-react";
@@ -34,6 +35,14 @@ export const NAV_ITEMS: readonly NavItem[] = [
     description: "Performance, KPIs and cumulative yield of every PV system.",
     icon: Sun,
     accent: "solar",
+  },
+  {
+    href: "/soiling",
+    label: "Soiling",
+    title: "Module soiling",
+    description: "Dust on every PV system, string and module, and when to clean.",
+    icon: SprayCan,
+    accent: "dust",
   },
   {
     href: "/battery",
