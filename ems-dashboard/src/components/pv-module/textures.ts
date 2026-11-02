@@ -1,45 +1,8 @@
 import * as THREE from "three";
+import { CELL_LAYOUT, CELL_TONE, FALLBACK_LAYOUT, type CellLayout } from "@/lib/module-layout";
+import { rng } from "@/lib/random";
 
-/** Visual layout of a module, by technology (landscape: columns run along the long edge). */
-export interface CellLayout {
-  style: "mono" | "poly" | "hjt" | "thinfilm";
-  cols: number;
-  rows: number;
-  /** Half-cut cells: the module is split into two halves with a centre gap. */
-  half: boolean;
-  busbars: number;
-  /** Colour seen between the cells (white backsheet, or the rear glass of glass–glass modules). */
-  backsheet: string;
-  /** Thin-film modules are usually frameless glass–glass laminates. */
-  framed: boolean;
-}
-
-export const CELL_LAYOUT: Record<string, CellLayout> = {
-  PERC: { style: "mono", cols: 22, rows: 6, half: true, busbars: 9, backsheet: "#e8ecf2", framed: true },
-  "Poly-Si": { style: "poly", cols: 12, rows: 6, half: false, busbars: 4, backsheet: "#edf0f5", framed: true },
-  TOPCon: { style: "mono", cols: 20, rows: 6, half: true, busbars: 16, backsheet: "#6e7d92", framed: true },
-  CdTe: { style: "thinfilm", cols: 1, rows: 1, half: false, busbars: 0, backsheet: "#3b4249", framed: false },
-  HJT: { style: "hjt", cols: 18, rows: 6, half: true, busbars: 12, backsheet: "#75849a", framed: true },
-  "Bi-PERC": { style: "mono", cols: 24, rows: 6, half: true, busbars: 10, backsheet: "#71819a", framed: true },
-};
-
-export const FALLBACK_LAYOUT = CELL_LAYOUT.PERC;
-
-/** Average cell colour — used for the module tiles of the structure map. */
-export const CELL_TONE: Record<CellLayout["style"], string> = {
-  mono: "#14284d",
-  poly: "#2a5397",
-  hjt: "#0d1629",
-  thinfilm: "#1f2422",
-};
-
-function rng(seed: number) {
-  let s = seed >>> 0 || 1;
-  return () => {
-    s = (s * 1664525 + 1013904223) >>> 0;
-    return s / 4294967296;
-  };
-}
+export { CELL_LAYOUT, CELL_TONE, FALLBACK_LAYOUT, rng, type CellLayout };
 
 function roundedCell(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, chamfer: number) {
   ctx.beginPath();

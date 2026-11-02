@@ -1,5 +1,5 @@
 import { dustCoverage, soilingLevel, type SoilingLevel } from "@/lib/soiling";
-import { CELL_LAYOUT, CELL_TONE, FALLBACK_LAYOUT } from "./textures";
+import { CELL_LAYOUT, CELL_TONE, FALLBACK_LAYOUT } from "@/lib/module-layout";
 
 export const LEVEL_COLOR: Record<SoilingLevel, string> = {
   clean: "#10b981",

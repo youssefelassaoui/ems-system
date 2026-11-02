@@ -175,6 +175,22 @@
   --color-brand-950: #2f1e12;
 }
 
+/* Drone thermal inspection — crimson */
+[data-accent="thermal"] {
+  --accent-rgb: 225 29 72;
+  --color-brand-50: #fff1f2;
+  --color-brand-100: #ffe4e6;
+  --color-brand-200: #fecdd3;
+  --color-brand-300: #fda4af;
+  --color-brand-400: #fb7185;
+  --color-brand-500: #f43f5e;
+  --color-brand-600: #e11d48;
+  --color-brand-700: #be123c;
+  --color-brand-800: #9f1239;
+  --color-brand-900: #881337;
+  --color-brand-950: #4c0519;
+}
+
 /* Shadows that take the colour of the surrounding accent. */
 @utility shadow-accent-glow {
   box-shadow: 0 18px 44px -18px rgb(var(--accent-rgb) / 0.55);

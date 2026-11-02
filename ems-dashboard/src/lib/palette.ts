@@ -6,12 +6,13 @@
  *   grid    → network violet
  *   load    → campus blue (also the brand colour of the interface itself)
  *   dust    → sand, for module soiling
+ *   thermal → crimson, for the drone thermal inspection
  *
  * Charts and the 3D scene read the hex values below. Tailwind surfaces use the matching
  * `data-accent` scopes in `globals.css`, which re-map the `brand-*` ramp for everything inside.
  */
 
-export type EnergyKey = "solar" | "battery" | "grid" | "load" | "dust";
+export type EnergyKey = "solar" | "battery" | "grid" | "load" | "dust" | "thermal";
 
 export interface EnergyTone {
   label: string;
@@ -60,6 +61,13 @@ export const ENERGY: Record<EnergyKey, EnergyTone> = {
     soft: "#dcb98a",
     deep: "#7f5431",
     gradient: "linear-gradient(135deg,#d9b27a,#9c6a3a)",
+  },
+  thermal: {
+    label: "Thermal",
+    main: "#e11d48",
+    soft: "#fda4af",
+    deep: "#9f1239",
+    gradient: "linear-gradient(135deg,#fb7185,#be123c)",
   },
 };
 

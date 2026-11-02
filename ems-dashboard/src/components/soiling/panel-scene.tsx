@@ -10,13 +10,9 @@ import {
   createCellTexture,
   createDustTexture,
   createMoteTexture,
-  type CellLayout,
-} from "./textures";
+} from "@/components/pv-module/textures";
+import { GLASS_Z, MODULE_H as H, MODULE_W as W, ModuleBody } from "@/components/pv-module/module-body";
 
-/** Landscape module, metres. */
-const W = 2.28;
-const H = 1.13;
-const T = 0.035;
 const TILT = -0.62;
 
 export interface PanelSceneProps {
@@ -30,37 +26,6 @@ export interface PanelSceneProps {
   /** "Clean preview": fade the dust layer out. */
   clean: boolean;
   active: boolean;
-}
-
-function Frame({ layout }: { layout: CellLayout }) {
-  if (!layout.framed) {
-    // Frameless glass–glass laminate: thin clear edge only.
-    return (
-      <mesh>
-        <boxGeometry args={[W + 0.01, H + 0.01, T * 0.45]} />
-        <meshPhysicalMaterial color="#9fb3b8" roughness={0.15} transmission={0.4} transparent opacity={0.55} />
-      </mesh>
-    );
-  }
-  const f = 0.032;
-  const d = T * 1.25;
-  const mat = <meshStandardMaterial color="#c9d0d9" metalness={0.85} roughness={0.32} />;
-  return (
-    <group>
-      {[1, -1].map((s) => (
-        <mesh key={`h${s}`} position={[0, s * (H / 2 + f / 2), 0]} castShadow>
-          <boxGeometry args={[W + 2 * f, f, d]} />
-          {mat}
-        </mesh>
-      ))}
-      {[1, -1].map((s) => (
-        <mesh key={`v${s}`} position={[s * (W / 2 + f / 2), 0, 0]} castShadow>
-          <boxGeometry args={[f, H, d]} />
-          {mat}
-        </mesh>
-      ))}
-    </group>
-  );
 }
 
 function Module({ technology, bifacial, coverage, hotspot, seed, clean }: Omit<PanelSceneProps, "active">) {
@@ -92,59 +57,20 @@ function Module({ technology, bifacial, coverage, hotspot, seed, clean }: Omit<P
   return (
     <group ref={group}>
       <group rotation={[TILT, 0, 0]}>
-        {/* Laminate */}
-        <mesh castShadow receiveShadow>
-          <boxGeometry args={[W, H, T * 0.4]} />
-          <meshStandardMaterial color={layout.backsheet} roughness={0.6} />
-        </mesh>
-        {/* Cells under glass */}
-        <mesh position={[0, 0, T * 0.21]}>
-          <planeGeometry args={[W, H]} />
-          <meshPhysicalMaterial
-            map={cells}
-            roughness={0.28}
-            metalness={0}
-            clearcoat={1}
-            clearcoatRoughness={0.08}
-            envMapIntensity={0.55}
-          />
-        </mesh>
-        {/* Dust on the glass */}
-        <mesh position={[0, 0, T * 0.215 + 0.002]}>
-          <planeGeometry args={[W, H]} />
-          <meshStandardMaterial
-            ref={dustMat}
-            map={dust}
-            transparent
-            opacity={0}
-            roughness={0.95}
-            depthWrite={false}
-          />
-        </mesh>
-        {/* Rear: white backsheet, or cells seen through the rear glass of bifacial modules */}
-        <mesh position={[0, 0, -T * 0.21]} rotation={[0, Math.PI, 0]}>
-          <planeGeometry args={[W, H]} />
-          {bifacial ? (
-            <meshStandardMaterial map={cells} color="#9aa3b0" roughness={0.3} />
-          ) : (
-            <meshStandardMaterial color="#e9ecf0" roughness={0.75} />
-          )}
-        </mesh>
-        {/* Junction box(es) */}
-        {(layout.half ? [-0.32, 0, 0.32] : [0]).map((x) => (
-          <mesh key={x} position={[x, H * 0.36, -T * 0.21 - 0.018]} castShadow>
-            <boxGeometry args={[0.1, 0.07, 0.03]} />
-            <meshStandardMaterial color="#1d2330" roughness={0.5} />
+        <ModuleBody layout={layout} bifacial={bifacial} cells={cells}>
+          {/* Dust on the glass */}
+          <mesh position={[0, 0, GLASS_Z + 0.002]}>
+            <planeGeometry args={[W, H]} />
+            <meshStandardMaterial
+              ref={dustMat}
+              map={dust}
+              transparent
+              opacity={0}
+              roughness={0.95}
+              depthWrite={false}
+            />
           </mesh>
-        ))}
-        <Frame layout={layout} />
-        {/* Mounting rails */}
-        {[-0.62, 0.62].map((x) => (
-          <mesh key={x} position={[x, 0, -T - 0.025]} castShadow>
-            <boxGeometry args={[0.045, H * 1.08, 0.04]} />
-            <meshStandardMaterial color="#aeb6c2" metalness={0.7} roughness={0.4} />
-          </mesh>
-        ))}
+        </ModuleBody>
       </group>
     </group>
   );

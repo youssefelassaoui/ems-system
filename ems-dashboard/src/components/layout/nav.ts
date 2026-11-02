@@ -2,6 +2,7 @@ import {
   BatteryCharging,
   CloudSun,
   LayoutDashboard,
+  Drone,
   PlugZap,
   SprayCan,
   Sun,
@@ -43,6 +44,14 @@ export const NAV_ITEMS: readonly NavItem[] = [
     description: "Dust on every PV system, string and module, and when to clean.",
     icon: SprayCan,
     accent: "dust",
+  },
+  {
+    href: "/inspection",
+    label: "Drone inspection",
+    title: "Drone inspection",
+    description: "Thermal and RGB drone survey of every module, with the anomalies it found.",
+    icon: Drone,
+    accent: "thermal",
   },
   {
     href: "/battery",
