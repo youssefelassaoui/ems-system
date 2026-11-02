@@ -12,18 +12,13 @@ import { SoilingSummary } from "./summary-row";
 import { SystemChips } from "./system-chips";
 import { useSoiling } from "./use-soiling";
 
-/** Starts on the most soiled system, on a typical module. */
-function initialSelection(losses: number[]) {
-  const index = losses.reduce((best, l, i) => (l > losses[best] ? i : best), 0);
-  return { index, module: typicalModule(index) };
-}
-
 export function SoilingView() {
   const { snapshot } = useLive();
   const soiling = useSoiling();
-  const [selection, setSelection] = useState<{ index: number; module: ModuleRef }>(() =>
-    initialSelection(soiling.systems.map((s) => s.loss)),
-  );
+  const [selection, setSelection] = useState<{ index: number; module: ModuleRef }>(() => ({
+    index: 0,
+    module: typicalModule(0),
+  }));
   const { index, module } = selection;
 
   const selectSystem = (i: number) => setSelection({ index: i, module: typicalModule(i) });
