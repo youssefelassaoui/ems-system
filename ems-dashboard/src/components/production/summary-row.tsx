@@ -20,7 +20,6 @@ export function SummaryRow() {
   return (
     <KpiGrid>
       <KpiTile
-        energy="solar"
         delay={40}
         icon={<Zap />}
         label="Output"
@@ -35,7 +34,6 @@ export function SummaryRow() {
       />
 
       <KpiTile
-        energy="solar"
         delay={90}
         icon={<Sun />}
         label="Produced today"
@@ -50,7 +48,6 @@ export function SummaryRow() {
       />
 
       <KpiTile
-        energy="solar"
         delay={140}
         icon={<Gauge />}
         label="Performance"
@@ -72,7 +69,6 @@ export function SummaryRow() {
       />
 
       <KpiTile
-        energy="solar"
         delay={190}
         icon={<Layers />}
         label="Last 30 days"

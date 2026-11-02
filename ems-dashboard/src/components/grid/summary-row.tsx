@@ -30,7 +30,6 @@ export function GridSummary() {
   return (
     <KpiGrid>
       <KpiTile
-        energy="grid"
         delay={40}
         icon={<PlugZap />}
         label="Net exchange"
@@ -40,7 +39,6 @@ export function GridSummary() {
       />
 
       <KpiTile
-        energy="grid"
         delay={90}
         icon={<ArrowDownToLine />}
         label="Imported today"
@@ -54,7 +52,6 @@ export function GridSummary() {
       />
 
       <KpiTile
-        energy="grid"
         delay={140}
         icon={<ArrowUpFromLine />}
         label="Exported today"
@@ -67,7 +64,6 @@ export function GridSummary() {
       />
 
       <KpiTile
-        energy="grid"
         delay={190}
         icon={<Waves />}
         label="Power quality"

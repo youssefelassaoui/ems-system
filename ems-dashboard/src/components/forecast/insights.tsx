@@ -9,17 +9,14 @@ import { dayLabel } from "./day-label";
 function Insight({
   icon,
   title,
-  accent,
   children,
 }: {
   icon: ReactNode;
   title: string;
-  /** Colour scope of the icon tile. */
-  accent: "solar" | "battery" | "load";
   children: ReactNode;
 }) {
   return (
-    <li data-accent={accent} className="flex gap-3.5 rounded-2xl border border-line bg-white p-3.5 transition hover:border-brand-200 hover:shadow-soft">
+    <li className="flex gap-3.5 rounded-2xl border border-line bg-white p-3.5 transition hover:border-brand-200 hover:shadow-soft">
       <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 [&>svg]:size-[18px]">
         {icon}
       </span>
@@ -61,26 +58,26 @@ export function Insights({
         icon={<Lightbulb className="size-5" />}
       />
       <ul className="space-y-3">
-        <Insight accent="solar" icon={<TrendingUp />} title={`${(total / 1000).toFixed(1)} MWh expected this week`}>
+        <Insight icon={<TrendingUp />} title={`${(total / 1000).toFixed(1)} MWh expected this week`}>
           {change >= 0 ? "Up" : "Down"} <strong className="font-semibold text-ink-700">{Math.abs(change).toFixed(0)}%</strong>{" "}
           versus the previous 7 days of measured production.
         </Insight>
-        <Insight accent="solar" icon={<SunMedium />} title={`Best solar day · ${dayLabel(best.index, dateISO).long}`}>
+        <Insight icon={<SunMedium />} title={`Best solar day · ${dayLabel(best.index, dateISO).long}`}>
           {(best.pvEnergyKwh / 1000).toFixed(1)} MWh with {best.cloudAvg.toFixed(0)}% mean cloud cover — ideal for
           flexible loads such as EV fleet charging.
         </Insight>
         {lowSolar && (
-          <Insight accent="battery" icon={<BatteryCharging />} title={`Low solar · ${dayLabel(worst.index, dateISO).long}`}>
+          <Insight icon={<BatteryCharging />} title={`Low solar · ${dayLabel(worst.index, dateISO).long}`}>
             Only {(worst.pvEnergyKwh / 1000).toFixed(1)} MWh expected. Schedule an off-peak battery top-up
             (22:00 – 06:00) the night before.
           </Insight>
         )}
         {rain ? (
-          <Insight accent="load" icon={<CloudRain />} title={`Rain · ${dayLabel(rain.index, dateISO).long}`}>
+          <Insight icon={<CloudRain />} title={`Rain · ${dayLabel(rain.index, dateISO).long}`}>
             {rain.precipProb.toFixed(0)}% precipitation probability — natural cleaning for the soiled PV System 4 modules.
           </Insight>
         ) : (
-          <Insight accent="solar" icon={<CalendarCheck />} title="Dry week ahead">
+          <Insight icon={<CalendarCheck />} title="Dry week ahead">
             No significant rain expected — a good window to clean the PV System 4 modules.
           </Insight>
         )}

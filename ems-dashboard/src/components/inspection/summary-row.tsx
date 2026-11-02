@@ -15,7 +15,6 @@ export function InspectionSummary({ flightDate }: { flightDate: string }) {
   return (
     <KpiGrid>
       <KpiTile
-        energy="thermal"
         delay={40}
         icon={<ScanEye />}
         label="Anomalies found"
@@ -27,7 +26,6 @@ export function InspectionSummary({ flightDate }: { flightDate: string }) {
         }
       />
       <KpiTile
-        energy="thermal"
         delay={90}
         icon={<Zap />}
         label="Power at risk"
@@ -44,7 +42,6 @@ export function InspectionSummary({ flightDate }: { flightDate: string }) {
         }
       />
       <KpiTile
-        energy="thermal"
         delay={140}
         icon={<Thermometer />}
         label="Hottest anomaly"
@@ -62,7 +59,6 @@ export function InspectionSummary({ flightDate }: { flightDate: string }) {
         }
       />
       <KpiTile
-        energy="thermal"
         delay={190}
         icon={<Drone />}
         label="Modules scanned"

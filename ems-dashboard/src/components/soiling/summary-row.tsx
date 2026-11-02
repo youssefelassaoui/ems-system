@@ -16,7 +16,6 @@ export function SoilingSummary() {
   return (
     <KpiGrid>
       <KpiTile
-        energy="dust"
         delay={40}
         icon={<Wind />}
         label="Fleet soiling"
@@ -36,7 +35,6 @@ export function SoilingSummary() {
       />
 
       <KpiTile
-        energy="dust"
         delay={90}
         icon={<TrendingDown />}
         label="Lost today"
@@ -50,7 +48,6 @@ export function SoilingSummary() {
       />
 
       <KpiTile
-        energy="dust"
         delay={140}
         icon={<AlertTriangle />}
         label="Most soiled"
@@ -69,7 +66,6 @@ export function SoilingSummary() {
       />
 
       <KpiTile
-        energy="dust"
         delay={190}
         icon={<SprayCan />}
         label="Cleaning due"

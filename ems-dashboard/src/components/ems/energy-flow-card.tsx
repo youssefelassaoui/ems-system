@@ -8,7 +8,6 @@ import { useLive } from "@/providers/live-provider";
 import { smoothstep, type EnergyFlows } from "@/lib/simulation";
 import { ASSET_INFO, type AssetId } from "@/lib/assets";
 import { cn } from "@/lib/cn";
-import { SITE } from "@/lib/site";
 import { Card } from "@/components/ui/card";
 import { LiveDot } from "@/components/ui/live-dot";
 import { AssetCard } from "./asset-card";
@@ -250,7 +249,7 @@ export function EnergyFlowCard({ className }: { className?: string }) {
           <h2 className="font-display mt-3 text-[22px] font-bold leading-tight text-ink-900 sm:text-[26px]">
             Live energy flow
           </h2>
-          <p className="mt-0.5 text-[13px] text-ink-500">3D digital twin · {SITE.name}</p>
+          <p className="mt-0.5 text-[13px] text-ink-500">3D digital twin</p>
         </div>
 
         {/* Controls */}

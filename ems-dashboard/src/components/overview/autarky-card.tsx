@@ -11,17 +11,14 @@ import { formatEnergy, joinQuantity } from "@/lib/format";
 function Stat({
   icon,
   label,
-  accent,
   children,
 }: {
   icon: ReactNode;
   label: string;
-  /** Colour scope of the icon tile. */
-  accent: "solar" | "eco";
   children: ReactNode;
 }) {
   return (
-    <div data-accent={accent} className="flex items-center gap-3 rounded-2xl bg-ink-50/80 px-4 py-3 ring-1 ring-inset ring-line">
+    <div className="flex items-center gap-3 rounded-2xl bg-ink-50/80 px-4 py-3 ring-1 ring-inset ring-line">
       <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-white text-brand-600 shadow-soft">
         {icon}
       </span>
@@ -46,8 +43,7 @@ export function AutarkyCard({ className }: { className?: string }) {
       />
 
       <div className="flex flex-col items-center gap-6 sm:flex-row xl:flex-col 2xl:flex-row">
-        {/* Autarky is green: the share of the campus served by its own clean energy. */}
-        <div data-accent="eco">
+        <div>
           <RadialGauge value={today.selfSufficiency} size={150} stroke={13}>
             <div className="font-display text-[34px] font-bold leading-none text-ink-900">
               <AnimatedNumber value={today.selfSufficiency * 100} decimals={0} />
@@ -60,14 +56,14 @@ export function AutarkyCard({ className }: { className?: string }) {
         </div>
 
         <div className="w-full min-w-0 flex-1 space-y-2.5">
-          <Stat accent="solar" icon={<Recycle className="size-[18px]" />} label="Self-consumption">
+          <Stat icon={<Recycle className="size-[18px]" />} label="Self-consumption">
             <AnimatedNumber value={today.selfConsumption * 100} decimals={0} />%
           </Stat>
-          <Stat accent="eco" icon={<Leaf className="size-[18px]" />} label="CO₂ avoided">
+          <Stat icon={<Leaf className="size-[18px]" />} label="CO₂ avoided">
             <AnimatedNumber value={fleet.co2AvoidedKg / 1000} decimals={2} />
             <span className="ml-1 text-[12px] font-semibold text-ink-400">tonnes</span>
           </Stat>
-          <Stat accent="solar" icon={<Sun className="size-[18px]" />} label="Solar yield today">
+          <Stat icon={<Sun className="size-[18px]" />} label="Solar yield today">
             <AnimatedQuantity
               value={fleet.todayKwh}
               kind="energy"

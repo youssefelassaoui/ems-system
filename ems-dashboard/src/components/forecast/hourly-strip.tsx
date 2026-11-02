@@ -48,7 +48,7 @@ export function HourlyStrip({ day, label }: { day: DayForecast; label: string })
                 />
                 <span className="font-display text-[17px] font-bold leading-none">{h.temp.toFixed(0)}°</span>
 
-                <div data-accent="solar" className="mt-3 flex h-12 w-full items-end justify-center">
+                <div className="mt-3 flex h-12 w-full items-end justify-center">
                   <div
                     className={cn(
                       "w-3.5 rounded-t-md",

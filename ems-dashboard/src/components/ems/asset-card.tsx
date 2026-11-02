@@ -5,21 +5,11 @@ import type { ReactNode } from "react";
 import { ArrowUpRight, BatteryCharging, PlugZap, Sun } from "lucide-react";
 import { ASSET_INFO, type AssetId } from "@/lib/assets";
 import { cn } from "@/lib/cn";
-import { ASSET_ACCENT, ENERGY } from "@/lib/palette";
 
-export const ASSET_STYLE: Record<AssetId, { accent: string; icon: ReactNode }> = {
-  pv: {
-    accent: ENERGY.solar.gradient,
-    icon: <Sun className="size-5" />,
-  },
-  battery: {
-    accent: ENERGY.battery.gradient,
-    icon: <BatteryCharging className="size-5" />,
-  },
-  grid: {
-    accent: ENERGY.grid.gradient,
-    icon: <PlugZap className="size-5" />,
-  },
+export const ASSET_STYLE: Record<AssetId, { icon: ReactNode }> = {
+  pv: { icon: <Sun className="size-5" /> },
+  battery: { icon: <BatteryCharging className="size-5" /> },
+  grid: { icon: <PlugZap className="size-5" /> },
 };
 
 /**
@@ -50,17 +40,13 @@ export function AssetCard({
 
   return (
     <div
-      data-accent={ASSET_ACCENT[id]}
       className={cn(
         "animate-pop w-[288px] max-w-[calc(100vw-2rem)] rounded-3xl border border-white bg-white/95 p-4 shadow-[0_26px_60px_-18px_rgb(var(--accent-rgb)/0.5)] ring-1 ring-brand-100 backdrop-blur-xl",
         className,
       )}
     >
       <div className="flex items-center gap-3">
-        <span
-          className="grid size-11 shrink-0 place-items-center rounded-2xl text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]"
-          style={{ background: style.accent }}
-        >
+        <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-800 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
           {style.icon}
         </span>
         <div className="min-w-0">

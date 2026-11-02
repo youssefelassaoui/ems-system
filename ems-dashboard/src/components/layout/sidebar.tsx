@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BatteryCharging, ChevronLeft, ChevronRight, MapPin, Radio, Sun } from "lucide-react";
+import { BatteryCharging, ChevronLeft, ChevronRight, Radio, Sun } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { BATTERY, SITE } from "@/lib/site";
+import { BATTERY } from "@/lib/site";
 import { TOTAL_KWP } from "@/lib/pv-systems";
 import { LogoMark } from "./logo";
 import { NAV_ITEMS } from "./nav";
@@ -161,12 +161,6 @@ export function Sidebar({
                   <Radio className="size-4 text-white/70" />
                 </div>
 
-                <p className="font-display mt-4 text-[17px] font-bold leading-snug">{SITE.name}</p>
-                <p className="mt-0.5 flex items-center gap-1.5 text-[12px] text-white/75">
-                  <MapPin className="size-3.5" />
-                  {SITE.location}
-                </p>
-
                 <dl className="mt-4 grid grid-cols-2 gap-2">
                   <div className="rounded-2xl bg-white/12 p-3 ring-1 ring-inset ring-white/15">
                     <dt className="flex items-center gap-1.5 text-[11px] text-white/70">
@@ -200,9 +194,7 @@ export function Sidebar({
             <span className="absolute -right-0.5 -top-0.5 grid size-3.5 place-items-center rounded-full bg-white">
               <LiveDot />
             </span>
-            <Tooltip>
-              Grid connected · {SITE.location}
-            </Tooltip>
+            <Tooltip>Grid connected</Tooltip>
           </div>
         )}
       </div>

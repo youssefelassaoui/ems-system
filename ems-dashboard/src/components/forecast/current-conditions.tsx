@@ -3,7 +3,6 @@
 import { useMemo, type ReactNode } from "react";
 import { Cloud, Droplets, Eye, Gauge, Sun, Wind } from "lucide-react";
 import { useLive } from "@/providers/live-provider";
-import { SITE } from "@/lib/site";
 import { CONDITION_LABEL, getCurrentConditions } from "@/lib/weather";
 import { formatClock } from "@/lib/format";
 import { AnimatedNumber } from "@/components/ui/animated-number";
@@ -49,7 +48,7 @@ export function CurrentConditions({ className }: { className?: string }) {
               Live conditions
             </Badge>
             <span className="text-[12.5px] text-white/75">
-              {SITE.name} · {formatClock(minute)}
+              {formatClock(minute)}
             </span>
           </div>
 

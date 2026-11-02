@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { ENERGY, type EnergyKey } from "@/lib/palette";
+import { ENERGY } from "@/lib/palette";
 import { cn } from "@/lib/cn";
 import { Sparkline } from "@/components/ui/sparkline";
 
@@ -14,8 +14,6 @@ export function KpiGrid({ children, className }: { children: ReactNode; classNam
 }
 
 export interface KpiTileProps {
-  /** Which energy source the tile shows — drives its colour. */
-  energy: EnergyKey;
   icon: ReactNode;
   label: string;
   value: ReactNode;
@@ -32,11 +30,10 @@ export interface KpiTileProps {
 }
 
 /**
- * Compact KPI tile: a soft wash and a slim rail in the source colour, a gradient icon, the label,
- * a large live figure, one line of context and an optional sparkline.
+ * Compact KPI tile in the platform blue: a soft wash, a slim rail, the label, a live figure
+ * and an optional sparkline.
  */
-export function KpiTile({ energy, icon, label, value, sub, series, href, delay = 0, min, max }: KpiTileProps) {
-  const tone = ENERGY[energy];
+export function KpiTile({ icon, label, value, sub, series, href, delay = 0, min, max }: KpiTileProps) {
   const className = cn(
     "enter group relative flex h-[72px] items-center gap-2.5 overflow-hidden rounded-[20px] border border-line bg-white px-3 shadow-accent-card transition-all duration-300 sm:h-[84px] sm:gap-3.5 sm:rounded-[22px] sm:px-4",
     href && "hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-accent-lift",
@@ -44,14 +41,10 @@ export function KpiTile({ energy, icon, label, value, sub, series, href, delay =
 
   const content = (
     <>
-      {/* Source colour: a soft wash behind the icon and a slim rail on the edge. */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-3/5 bg-gradient-to-r from-brand-50 via-brand-50/50 to-transparent" />
       <span className="pointer-events-none absolute inset-y-3.5 left-0 w-[3px] rounded-r-full bg-gradient-to-b from-brand-300 to-brand-600" />
 
-      <span
-        className="relative grid size-8 shrink-0 place-items-center rounded-xl text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_6px_14px_-6px_rgb(var(--accent-rgb)/0.7)] sm:size-10 sm:rounded-2xl [&>svg]:size-4 sm:[&>svg]:size-[19px]"
-        style={{ background: tone.gradient }}
-      >
+      <span className="relative grid size-8 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-800 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_6px_14px_-6px_rgb(var(--accent-rgb)/0.7)] sm:size-10 sm:rounded-2xl [&>svg]:size-4 sm:[&>svg]:size-[19px]">
         {icon}
       </span>
 
@@ -65,12 +58,9 @@ export function KpiTile({ energy, icon, label, value, sub, series, href, delay =
         <p className="mt-0.5 truncate text-[11.5px] text-ink-500">{sub}</p>
       </div>
 
-      {/* Shown whenever the tile is wide enough: two-column tablets and wide desktops.
-          (Written as two ranges: Tailwind sorts `min-[…]` variants before named breakpoints,
-          so a `lg:hidden` here would override `min-[1340px]:block`.) */}
       {series && (
         <div className="relative hidden w-[72px] shrink-0 self-end pb-3 sm:max-lg:block min-[1340px]:block">
-          <Sparkline data={series} color={tone.main} height={36} min={min} max={max} />
+          <Sparkline data={series} color={ENERGY.load.main} height={36} min={min} max={max} />
         </div>
       )}
 
@@ -83,11 +73,11 @@ export function KpiTile({ energy, icon, label, value, sub, series, href, delay =
   const style = { animationDelay: `${delay}ms` };
 
   return href ? (
-    <Link href={href} data-accent={energy} className={className} style={style} aria-label={`${label} details`}>
+    <Link href={href} className={className} style={style} aria-label={`${label} details`}>
       {content}
     </Link>
   ) : (
-    <div data-accent={energy} className={className} style={style}>
+    <div className={className} style={style}>
       {content}
     </div>
   );

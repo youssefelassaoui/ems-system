@@ -30,7 +30,6 @@ export function BatterySummary() {
   return (
     <KpiGrid>
       <KpiTile
-        energy="battery"
         delay={40}
         icon={<BatteryCharging />}
         label="State of charge"
@@ -52,7 +51,6 @@ export function BatterySummary() {
       />
 
       <KpiTile
-        energy="battery"
         delay={90}
         icon={<Activity />}
         label="Power exchange"
@@ -62,7 +60,6 @@ export function BatterySummary() {
       />
 
       <KpiTile
-        energy="battery"
         delay={140}
         icon={<Repeat2 />}
         label="Charged today"
@@ -79,7 +76,6 @@ export function BatterySummary() {
       />
 
       <KpiTile
-        energy="battery"
         delay={190}
         icon={<ShieldCheck />}
         label="State of health"

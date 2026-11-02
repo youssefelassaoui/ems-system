@@ -14,7 +14,7 @@ export function CarbonCard({ className }: { className?: string }) {
   const share = avoided + emitted > 1 ? avoided / (avoided + emitted) : 0;
 
   return (
-    <Card data-accent="eco" className={className}>
+    <Card className={className}>
       <CardHeader title="Carbon footprint" subtitle="Today, based on the grid emission factor" icon={<Leaf className="size-5" />} />
 
       <div className="grid grid-cols-2 gap-4">

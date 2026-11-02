@@ -6,7 +6,6 @@ import { ArrowUpRight, BatteryCharging, Building2, Cpu, PlugZap, Sun } from "luc
 import { ASSET_INFO, type AssetId } from "@/lib/assets";
 import { cn } from "@/lib/cn";
 import { formatPower } from "@/lib/format";
-import { ENERGY, type EnergyKey } from "@/lib/palette";
 import { TOTAL_KWP } from "@/lib/pv-systems";
 import { BATTERY } from "@/lib/site";
 import type { EnergyFlows } from "@/lib/simulation";
@@ -19,7 +18,6 @@ interface ChipProps {
   value: string;
   unit?: string;
   sub: string;
-  accent: string;
   icon: ReactNode;
 }
 
@@ -33,7 +31,6 @@ function Chip({
   value,
   unit,
   sub,
-  accent,
   icon,
   linked,
   active,
@@ -47,10 +44,7 @@ function Chip({
           : "shadow-[0_16px_36px_-12px_rgb(var(--accent-rgb)/0.45)] ring-1 ring-brand-100",
       )}
     >
-      <span
-        className="grid size-10 shrink-0 place-items-center rounded-xl text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] group-data-[compact=true]:size-8 group-data-[compact=true]:rounded-lg group-data-[compact=true]:[&>svg]:size-4"
-        style={{ background: accent }}
-      >
+      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-800 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] group-data-[compact=true]:size-8 group-data-[compact=true]:rounded-lg group-data-[compact=true]:[&>svg]:size-4">
         {icon}
       </span>
       <div className="leading-tight">
@@ -80,14 +74,6 @@ function Chip({
 
 const LINKED: readonly AssetId[] = ["pv", "battery", "grid"];
 
-/** Colour scope of every chip (and of its leader line). */
-const SCOPE: Record<(typeof LABEL_ANCHORS)[number]["id"], EnergyKey> = {
-  pv: "solar",
-  battery: "battery",
-  grid: "grid",
-  campus: "load",
-  hub: "load",
-};
 const isAsset = (id: string): id is AssetId => (LINKED as readonly string[]).includes(id);
 
 /**
@@ -136,7 +122,6 @@ export function LabelChips({
       value: pv.value,
       unit: pv.unit,
       sub: `${((flows.pv / TOTAL_KWP) * 100).toFixed(0)}% of ${(TOTAL_KWP / 1000).toFixed(1)} MWp`,
-      accent: ENERGY.solar.gradient,
       icon: <Sun className="size-5" />,
     },
     battery: {
@@ -145,7 +130,6 @@ export function LabelChips({
       value: (flows.soc * 100).toFixed(0),
       unit: "% SOC",
       sub: batterySub,
-      accent: ENERGY.battery.gradient,
       icon: <BatteryCharging className="size-5" />,
     },
     grid: {
@@ -154,7 +138,6 @@ export function LabelChips({
       value: grid.value,
       unit: grid.unit,
       sub: gridSub,
-      accent: ENERGY.grid.gradient,
       icon: <PlugZap className="size-5" />,
     },
     campus: {
@@ -163,7 +146,6 @@ export function LabelChips({
       value: load.value,
       unit: load.unit,
       sub: "Buildings · EV · labs",
-      accent: ENERGY.load.gradient,
       icon: <Building2 className="size-5" />,
     },
     hub: {
@@ -172,7 +154,6 @@ export function LabelChips({
       value: (selfSufficiency * 100).toFixed(0),
       unit: "% autarky",
       sub: "Optimising in real time",
-      accent: "linear-gradient(135deg,#1d4ed8,#0b1d4d)",
       icon: <Cpu className="size-5" />,
     },
   };
@@ -195,7 +176,7 @@ export function LabelChips({
 
         if (!isAsset(a.id)) {
           return (
-            <div key={a.id} ref={ref} data-accent={SCOPE[a.id]} className={wrapperClass} style={wrapperStyle} aria-hidden>
+            <div key={a.id} ref={ref} className={wrapperClass} style={wrapperStyle} aria-hidden>
               <Chip {...content[a.id]} />
               {leader}
             </div>
@@ -208,7 +189,6 @@ export function LabelChips({
           <Link
             key={id}
             ref={ref}
-            data-accent={SCOPE[id]}
             href={info.href}
             aria-label={`${content[id].title} — ${info.cta.toLowerCase()}`}
             className={cn(

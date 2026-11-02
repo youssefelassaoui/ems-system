@@ -68,7 +68,7 @@ export function Outlook({
                 </span>
               </p>
 
-              <div data-accent="solar" className="mt-4">
+              <div className="mt-4">
                 <div className="flex items-baseline justify-between">
                   <span
                     className={cn(

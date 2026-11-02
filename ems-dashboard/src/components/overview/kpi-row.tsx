@@ -36,7 +36,6 @@ export function KpiRow() {
   return (
     <KpiGrid>
       <KpiTile
-        energy="solar"
         href="/production"
         delay={40}
         icon={<Sun />}
@@ -51,7 +50,6 @@ export function KpiRow() {
       />
 
       <KpiTile
-        energy="load"
         delay={90}
         icon={<Building2 />}
         label="Consumption"
@@ -65,7 +63,6 @@ export function KpiRow() {
       />
 
       <KpiTile
-        energy="battery"
         href="/battery"
         delay={140}
         icon={<BatteryCharging />}
@@ -83,7 +80,6 @@ export function KpiRow() {
       />
 
       <KpiTile
-        energy="grid"
         href="/grid"
         delay={190}
         icon={<PlugZap />}
