@@ -14,7 +14,7 @@ const isBatteryEvent = (e: EnergyEvent) => /battery/i.test(`${e.title} ${e.detai
 
 export function BatteryView() {
   return (
-    <div data-accent="battery" className="space-y-6">
+    <div className="space-y-6">
       <BatterySummary />
 
       <BatteryChart className="enter [animation-delay:200ms]" />

@@ -13,7 +13,7 @@ export function FleetGlance({ className }: { className?: string }) {
   const { snapshot } = useLive();
 
   return (
-    <Card data-accent="solar" className={className}>
+    <Card className={className}>
       <CardHeader
         title="PV fleet at a glance"
         subtitle="Live output of every photovoltaic system"

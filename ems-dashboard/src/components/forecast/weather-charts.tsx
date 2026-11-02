@@ -90,7 +90,7 @@ export function WeatherCharts({ day }: { day: DayForecast }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <Card data-accent="solar">
+      <Card>
         <CardHeader
           title="Solar irradiance & clouds"
           subtitle="Global horizontal irradiance and cloud cover"

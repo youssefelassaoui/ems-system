@@ -84,7 +84,7 @@ export function LabelProjector({ labelsRef }: { labelsRef: LabelRefs }) {
         delete boxes.current[a.id]; // layout changed — re-measure
       }
 
-      // The EMS-core chip is decorative; drop it on small canvases to reduce clutter.
+      // The core chip is decorative; drop it on small canvases to reduce clutter.
       if (compact && a.id === "hub") {
         el.style.opacity = "0";
         continue;

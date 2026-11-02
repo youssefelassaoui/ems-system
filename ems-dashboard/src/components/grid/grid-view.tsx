@@ -32,7 +32,7 @@ export function GridView() {
   }, [nowStep]);
 
   return (
-    <div data-accent="grid" className="space-y-6">
+    <div className="space-y-6">
       <GridSummary />
 
       <GridChart className="enter [animation-delay:200ms]" />

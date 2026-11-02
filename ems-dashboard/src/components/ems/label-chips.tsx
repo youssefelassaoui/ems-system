@@ -167,8 +167,8 @@ export function LabelChips({
       icon: <Building2 className="size-5" />,
     },
     hub: {
-      title: "EMS core",
-      short: "EMS",
+      title: "Core",
+      short: "Core",
       value: (selfSufficiency * 100).toFixed(0),
       unit: "% autarky",
       sub: "Optimising in real time",

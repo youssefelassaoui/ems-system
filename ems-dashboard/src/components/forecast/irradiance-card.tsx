@@ -46,7 +46,7 @@ export function IrradianceCard({ className }: { className?: string }) {
   const delta = forecastNow > 5 ? ((actualNow - forecastNow) / forecastNow) * 100 : 0;
 
   return (
-    <Card data-accent="solar" className={className}>
+    <Card className={className}>
       <CardHeader
         title="Solar resource"
         subtitle="Irradiance on the horizontal plane"

@@ -53,7 +53,7 @@ export function TariffCard({ className }: { className?: string }) {
     <Card className={className}>
       <CardHeader
         title="Tariff windows"
-        subtitle="Illustrative time-of-use schedule · the EMS shifts energy accordingly"
+        subtitle="Illustrative time-of-use schedule · storage shifts energy accordingly"
         icon={<Clock3 className="size-5" />}
         action={
           <Badge tone="brand" dot>

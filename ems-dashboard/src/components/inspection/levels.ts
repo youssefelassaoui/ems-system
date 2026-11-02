@@ -12,10 +12,10 @@ import {
 import type { AnomalyType, Severity } from "@/lib/inspection";
 
 export const SEVERITY_COLOR: Record<Severity, string> = {
-  low: "#eab308",
-  medium: "#f97316",
-  high: "#ef4444",
-  critical: "#c026d3",
+  low: "#ca8a04",
+  medium: "#ea580c",
+  high: "#dc2626",
+  critical: "#9f1239",
 };
 
 export const ANOMALY_ICON: Record<AnomalyType, LucideIcon> = {

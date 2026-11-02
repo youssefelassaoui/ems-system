@@ -8,7 +8,7 @@ import type { SmoothRef } from "./types";
 
 const TICKS = 36;
 
-/** The EMS core: where every energy flow is orchestrated. */
+/** The energy hub: where every flow is orchestrated. */
 export function Hub({ smooth }: { smooth: SmoothRef }) {
   const spin = useRef<THREE.Group>(null);
   const octa = useRef<THREE.Mesh>(null);

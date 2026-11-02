@@ -4,7 +4,7 @@
  */
 export const SITE = {
   name: "Chaire Energy Campus",
-  shortName: "Chaire EMS",
+  shortName: "Logo",
   location: "Benguerir, Morocco",
   latitude: 32.23,
   longitude: -7.94,

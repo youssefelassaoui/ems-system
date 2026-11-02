@@ -26,7 +26,7 @@ export function ProductionView() {
   }, []);
 
   return (
-    <div data-accent="solar" className="space-y-6">
+    <div className="space-y-6">
       <SummaryRow />
 
       <div ref={chartRef} className="scroll-mt-24">

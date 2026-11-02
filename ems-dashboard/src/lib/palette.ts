@@ -3,13 +3,14 @@
  *
  *   solar   → sun amber / orange
  *   battery → storage green
- *   grid    → network violet
+ *   grid    → network indigo
  *   load    → campus blue (also the brand colour of the interface itself)
  *   dust    → sand, for module soiling
  *   thermal → crimson, for the drone thermal inspection
  *
- * Charts and the 3D scene read the hex values below. Tailwind surfaces use the matching
- * `data-accent` scopes in `globals.css`, which re-map the `brand-*` ramp for everything inside.
+ * Charts and the 3D scene read the hex values below. KPI tiles and other *data* widgets
+ * wrap themselves in the matching `data-accent` scope so their chrome follows the source.
+ * Page chrome never remaps — it always stays the brand blue.
  */
 
 export type EnergyKey = "solar" | "battery" | "grid" | "load" | "dust" | "thermal";
@@ -43,10 +44,10 @@ export const ENERGY: Record<EnergyKey, EnergyTone> = {
   },
   grid: {
     label: "Grid",
-    main: "#8b5cf6",
-    soft: "#c4b5fd",
-    deep: "#5b31c8",
-    gradient: "linear-gradient(135deg,#a78bfa,#5b31c8)",
+    main: "#5b6cf5",
+    soft: "#a8b4ff",
+    deep: "#3f4ec9",
+    gradient: "linear-gradient(135deg,#7b8cff,#4f63e8)",
   },
   load: {
     label: "Campus load",

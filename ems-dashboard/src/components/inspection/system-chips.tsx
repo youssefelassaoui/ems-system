@@ -3,7 +3,6 @@
 import { PV_SYSTEMS } from "@/lib/pv-systems";
 import { getInspection } from "@/lib/inspection";
 import { cn } from "@/lib/cn";
-import { ENERGY } from "@/lib/palette";
 import { SEVERITY_COLOR } from "./levels";
 
 export function SystemChips({ selected, onSelect }: { selected: number; onSelect: (index: number) => void }) {
@@ -33,8 +32,11 @@ export function SystemChips({ selected, onSelect }: { selected: number; onSelect
               )}
             >
               <span
-                className="grid size-8 place-items-center rounded-full text-[11px] font-bold text-white"
-                style={{ background: on ? ENERGY.thermal.gradient : p.color }}
+                className={cn(
+                  "grid size-8 place-items-center rounded-full text-[11px] font-bold text-white",
+                  on && "bg-gradient-to-br from-brand-500 to-brand-800",
+                )}
+                style={on ? undefined : { background: p.color }}
               >
                 {i + 1}
               </span>

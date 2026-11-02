@@ -38,8 +38,11 @@ export function SystemChips({
               )}
             >
               <span
-                className="grid size-8 place-items-center rounded-full text-[11px] font-bold text-white"
-                style={{ background: on ? "linear-gradient(135deg,#d9b27a,#9c6a3a)" : p.color }}
+                className={cn(
+                  "grid size-8 place-items-center rounded-full text-[11px] font-bold text-white",
+                  on && "bg-gradient-to-br from-brand-500 to-brand-800",
+                )}
+                style={on ? undefined : { background: p.color }}
               >
                 {i + 1}
               </span>

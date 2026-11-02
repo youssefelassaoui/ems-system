@@ -1,22 +1,23 @@
-# Chaire EMS — Energy Management Dashboard
+# Logo — Energy platform
 
 A Next.js dashboard for a hybrid energy site: **PV production**, **battery storage** and **grid exchange**,
 with a live 3D digital twin, per-system PV performance and weather-driven production forecasts.
 
-Design language: white surfaces with a blue chrome (`brand-*` scale in `src/app/globals.css`) and
-**realistic energy colours** for the data, Plus Jakarta Sans for display text, Inter for body text,
-tabular numerals for every live figure.
+The product identity is a **blue chrome**: sidebar, topbar, cards, buttons and selected states always
+use the `brand-*` scale in `src/app/globals.css`. Energy colours are reserved for *data* — KPI tiles,
+charts, 3D flows, soiling dust and thermal imagery. Plus Jakarta Sans for display text, Inter for body
+text, tabular numerals for every live figure.
 
 ### Energy colours
 
 | Source      | Colour | Used for |
 | ----------- | ------ | -------- |
-| Solar PV    | amber / orange | PV KPI, production page, solar flow, panel glow, irradiance and PV forecast charts |
-| Battery     | green  | storage KPI, battery page, SOC, charging, LED bars |
-| Grid        | violet | grid KPI, grid page, import / export, pylon and transformer |
-| Campus load | blue   | consumption, buildings, load curves (also the platform's brand colour) |
-| Soiling     | sand   | soiling page, dust on the 3D module and the module map |
-| Thermal     | red-orange | inspection page; thermal images use real radiometric palettes (Ironbow, Rainbow HC, White hot) |
+| Solar PV    | amber / orange | PV KPI tiles, solar flow, panel glow, irradiance and PV forecast series |
+| Battery     | green  | storage KPI, SOC, charging, LED bars |
+| Grid        | indigo | grid KPI, import / export, pylon and transformer |
+| Campus load | blue   | consumption, buildings, load curves (same as the platform chrome) |
+| Soiling     | sand   | dust on the 3D module and the module map |
+| Thermal     | crimson | inspection KPI tiles; thermal images use Ironbow, Rainbow HC and White hot |
 
 Tariff windows use green (off-peak) / amber (day) / red (peak); weather icons follow the condition.
 
@@ -24,16 +25,16 @@ How it works:
 
 - `src/lib/palette.ts` holds the hex values for everything that cannot read CSS (Three.js, Recharts) —
   `ENERGY`, `ASSET_ACCENT`, `TARIFF_COLOR` and `CHART`.
-- In `src/app/globals.css`, an element with `data-accent="solar | battery | grid | load | dust | thermal"` (or `eco`, an
-  alias of the battery green) re-maps the whole `brand-*` ramp inside it. Any component that uses
-  `brand-*` utilities (cards, badges, gauges, chips…) therefore recolours itself when it is wrapped in a scope.
+- In `src/app/globals.css`, a *data widget* with `data-accent="solar | battery | grid | load | dust | thermal"`
+  (or `eco`, an alias of the battery green) re-maps the `brand-*` ramp inside it. Page chrome is never
+  wrapped in a scope, so the platform stays one colour.
 - To change a colour, edit the ramp in `globals.css` **and** the matching entry in `palette.ts`.
 
 ## Pages
 
 | Route         | What it shows |
 | ------------- | ------------- |
-| `/`           | **Overview** — compact KPI strip and a full-height interactive **3D EMS model** (PV ⇄ battery ⇄ grid ⇄ campus load, animated flows that follow real-time data). **Hover** the PV field, the battery bank or the grid connection to get a static fact sheet; **click** one to open its detail page (on touch: tap once for the fact sheet, tap again to open). Below the fold: power balance, energy mix, autonomy & CO₂, daily power profile, system events, PV fleet table. |
+| `/`           | **Overview** — compact KPI strip and a full-height interactive **3D model** (PV ⇄ battery ⇄ grid ⇄ campus load, animated flows that follow real-time data). **Hover** the PV field, the battery bank or the grid connection to get a static fact sheet; **click** one to open its detail page (on touch: tap once for the fact sheet, tap again to open). Below the fold: power balance, energy mix, autonomy & CO₂, daily power profile, system events, PV fleet table. |
 | `/production` | **Energy production** — fleet KPIs, stacked power / cumulative-energy chart (all systems or a single one, measured vs forecast vs clear-sky), one card per PV system with real-time power, load gauge, today’s cumulative energy, 30-day and lifetime yield, performance ratio, specific yield, capacity factor, efficiency, irradiance, module temperature, inverter efficiency, availability — and its **configuration** (module technology, number of modules, strings and inverters), plus a performance comparison and a fleet configuration table. |
 | `/soiling`    | **Module soiling** — fleet soiling, energy lost to dust and cleaning due; chips to pick a PV system; its **structure** (inverters → strings → modules) as a clickable module map tinted by each module's soiling; the selected module in a large **3D view** whose dust layer matches the measured loss (a faint haze at 1–2 %, a heavy brown film above 8 %, bird droppings where present, a "clean preview" toggle); a 30-day soiling chart (system, module, fleet, rain / sand-wind / cleaning events, 5 % threshold) and a cleaning plan. |
 | `/inspection` | **Drone inspection** — the last thermographic survey: a replay of the flight on an orthophoto of the plant (lawnmower route at 30 m, the drone and its camera footprint, the thermal mosaic building up behind it, each detection as it is imaged, live telemetry); fleet anomaly KPIs; chips to pick a PV system; its **structure** with every string and module that holds an anomaly outlined by severity; the selected module in a **3D radiometric view** (Ironbow / Rainbow HC / White hot palettes, Bx1 box and Sp1 / Sp2 spot meters, temperature scale, ε and ambient conditions) with a **Thermal ⇄ RGB** switch; the anomaly sheet (type, ΔT, power loss, energy lost per year, affected area, IEC TS 62446-3 class, recommended action) and the system's anomaly register. |
@@ -100,7 +101,7 @@ src/
                           + global styles
   components/
     ems/                  3D digital twin (React Three Fiber), label chips, hover / tap fact-sheet card
-      scene/              platform, PV field, battery bank, grid pylon, campus, EMS hub, flow lines,
+      scene/              platform, PV field, battery bank, grid pylon, campus, energy hub, flow lines,
                           hotspots (invisible hit boxes + ground highlight for PV / battery / grid)
     pv-module/            3D PV module shared by the soiling and inspection pages (body, frame, junction
                           boxes, canvas textures per technology)

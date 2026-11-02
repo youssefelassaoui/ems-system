@@ -54,7 +54,7 @@ export function InspectionView() {
   const selectModule = (ref: ModuleRef) => setSelection({ index, module: ref });
 
   return (
-    <div data-accent="thermal" className="space-y-6">
+    <div className="space-y-6">
       <InspectionSummary flightDate={flightDate} />
 
       <MissionCard flightDate={flightDate} />

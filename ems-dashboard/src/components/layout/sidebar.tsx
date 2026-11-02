@@ -66,7 +66,7 @@ export function Sidebar({
       <Link
         href="/"
         onClick={onNavigate}
-        aria-label="Chaire EMS — overview"
+        aria-label="Logo — overview"
         className="flex items-center rounded-xl pl-[3.5px]"
       >
         <LogoMark className="shrink-0" />
@@ -76,12 +76,7 @@ export function Sidebar({
             expanded ? "ml-3 max-w-[180px] opacity-100" : "ml-0 max-w-0 opacity-0",
           )}
         >
-          <span className="font-display block text-[17px] font-bold tracking-tight text-ink-900">
-            Chaire <span className="text-brand-600">EMS</span>
-          </span>
-          <span className="block text-[11px] font-medium uppercase tracking-[0.16em] text-ink-400">
-            Energy platform
-          </span>
+          <span className="font-display block text-[17px] font-bold tracking-tight text-ink-900">Logo</span>
         </span>
       </Link>
 
@@ -110,7 +105,6 @@ export function Sidebar({
             <Link
               key={item.href}
               href={item.href}
-              data-accent={item.accent}
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               aria-label={item.label}
@@ -131,7 +125,7 @@ export function Sidebar({
                 className={cn(
                   "grid size-9 shrink-0 place-items-center rounded-xl transition-all duration-300",
                   active
-                    ? "bg-brand-600 text-white shadow-[0_8px_18px_-6px_rgb(var(--accent-rgb)/0.65)]"
+                    ? "bg-brand-600 text-white shadow-glow"
                     : "bg-ink-50 text-ink-500 group-hover:bg-white group-hover:text-brand-600",
                 )}
               >
@@ -207,7 +201,7 @@ export function Sidebar({
               <LiveDot />
             </span>
             <Tooltip>
-              Grid connected · {SITE.shortName}
+              Grid connected · {SITE.location}
             </Tooltip>
           </div>
         )}

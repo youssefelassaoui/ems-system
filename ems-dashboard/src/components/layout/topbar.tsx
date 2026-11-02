@@ -6,7 +6,6 @@ import { CalendarDays } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useLive } from "@/providers/live-provider";
 import { addDays, formatDate } from "@/lib/weather";
-import { SITE } from "@/lib/site";
 import { ClockControl } from "./clock-control";
 import { Logo } from "./logo";
 import { NAV_ITEMS } from "./nav";
@@ -26,11 +25,8 @@ export function Topbar() {
             <Logo compact />
           </div>
           <div className="min-w-0">
-            <p
-              data-accent={current.accent}
-              className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600"
-            >
-              {SITE.shortName}
+            <p className="hidden font-display text-[13px] font-bold tracking-tight text-brand-600 lg:block">
+              Logo
             </p>
             <h1 className="font-display truncate text-[20px] font-bold leading-tight text-ink-900 sm:text-[22px]">
               {current.title}
@@ -59,11 +55,10 @@ export function Topbar() {
             <Link
               key={item.href}
               href={item.href}
-              data-accent={item.accent}
               className={cn(
                 "flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold transition",
                 active
-                  ? "bg-brand-600 text-white shadow-[0_8px_18px_-6px_rgb(var(--accent-rgb)/0.6)]"
+                  ? "bg-brand-600 text-white shadow-glow"
                   : "bg-white text-ink-600 ring-1 ring-inset ring-line",
               )}
             >

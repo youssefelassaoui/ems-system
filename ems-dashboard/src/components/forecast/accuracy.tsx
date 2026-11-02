@@ -48,7 +48,7 @@ export function Accuracy({ dateISO, className }: { dateISO: string; className?: 
   }, [dateISO]);
 
   return (
-    <Card data-accent="solar" className={className}>
+    <Card className={className}>
       <CardHeader
         title="Forecast accuracy"
         subtitle="Day-ahead PV forecast versus measured production · last 7 days"

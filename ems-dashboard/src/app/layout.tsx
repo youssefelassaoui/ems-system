@@ -7,8 +7,8 @@ import { LiveProvider } from "@/providers/live-provider";
 
 export const metadata: Metadata = {
   title: {
-    default: "Chaire EMS — Energy Management Platform",
-    template: "%s · Chaire EMS",
+    default: "Logo — Energy platform",
+    template: "%s · Logo",
   },
   description:
     "Real-time energy management dashboard: photovoltaic production, battery storage, grid exchange, weather and PV forecasts.",

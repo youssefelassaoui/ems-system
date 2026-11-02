@@ -36,7 +36,7 @@ export function StrategyCard({ className }: { className?: string }) {
 
   return (
     <Card className={className}>
-      <CardHeader title="Operating strategy" subtitle="How the EMS dispatches storage" icon={<Workflow className="size-5" />} />
+      <CardHeader title="Operating strategy" subtitle="How storage is dispatched" icon={<Workflow className="size-5" />} />
 
       {/* Usable window */}
       <div className="mb-6">

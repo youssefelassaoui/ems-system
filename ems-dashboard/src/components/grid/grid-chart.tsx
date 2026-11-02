@@ -26,9 +26,9 @@ const STEP = 10;
 const TICKS = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440];
 const axisTick = { fill: "#8a9bbd", fontSize: 11.5, fontWeight: 500 };
 
-/** Importing is the network violet; exporting the solar surplus is a lighter, pinker violet. */
+/** Importing is the network indigo; exporting the solar surplus is a lighter indigo. */
 const IMPORT = ENERGY.grid.main;
-const EXPORT = "#d17bf5";
+const EXPORT = ENERGY.grid.soft;
 
 type Row = { minute: number; net: number | null; load: number | null };
 

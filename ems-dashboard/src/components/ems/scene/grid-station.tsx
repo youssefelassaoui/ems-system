@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { Line, RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
+import { ENERGY } from "@/lib/palette";
 import { NODE } from "./types";
 
 type P3 = [number, number, number];
@@ -13,7 +14,7 @@ const PYLON_POS: P3 = [GX + 2.35, 0, GZ + 1.25];
 const curvePoints = (curve: THREE.Curve<THREE.Vector3>, n = 40) =>
   curve.getPoints(n).map((v) => [v.x, v.y, v.z] as P3);
 
-/** Lattice transmission tower rendered as crisp violet line work. */
+/** Lattice transmission tower rendered as crisp indigo line work. */
 function Pylon() {
   const { frame, arms, wires } = useMemo(() => {
     const heights = [0, 1.3, 2.4, 3.3, 4.0, 4.7];
@@ -72,10 +73,10 @@ function Pylon() {
 
   return (
     <group position={PYLON_POS}>
-      <Line points={frame} segments color="#5b31c8" lineWidth={1.4} />
-      <Line points={arms} segments color="#5b31c8" lineWidth={2.2} />
+      <Line points={frame} segments color={ENERGY.grid.deep} lineWidth={1.4} />
+      <Line points={arms} segments color={ENERGY.grid.deep} lineWidth={2.2} />
       {wires.map((w, i) => (
-        <Line key={i} points={w} color="#9d86e8" lineWidth={1.1} />
+        <Line key={i} points={w} color={ENERGY.grid.soft} lineWidth={1.1} />
       ))}
       {([
         [0, 3.18, -1.25],
@@ -85,7 +86,7 @@ function Pylon() {
       ] as P3[]).map((p, i) => (
         <mesh key={i} position={p}>
           <cylinderGeometry args={[0.035, 0.05, 0.22, 10]} />
-          <meshStandardMaterial color="#e8e2ff" roughness={0.3} metalness={0.2} />
+          <meshStandardMaterial color="#e4e8ff" roughness={0.3} metalness={0.2} />
         </mesh>
       ))}
       {([
@@ -96,7 +97,7 @@ function Pylon() {
       ] as [number, number][]).map(([x, z], i) => (
         <mesh key={i} position={[x, 0.04, z]} receiveShadow>
           <boxGeometry args={[0.22, 0.08, 0.22]} />
-          <meshStandardMaterial color="#e3dcfb" roughness={0.6} />
+          <meshStandardMaterial color="#e4e8ff" roughness={0.6} />
         </mesh>
       ))}
     </group>
@@ -130,43 +131,43 @@ export function GridStation() {
 
   return (
     <group>
-      <Line points={fence} color="#b4a2f0" lineWidth={1.2} dashed dashSize={0.18} gapSize={0.1} />
+      <Line points={fence} color={ENERGY.grid.soft} lineWidth={1.2} dashed dashSize={0.18} gapSize={0.1} />
 
       {/* Transformer */}
       <group position={[GX, 0, GZ]}>
         <RoundedBox args={[1.5, 0.95, 1.05]} radius={0.06} smoothness={4} position={[0, 0.58, 0]} castShadow receiveShadow>
-          <meshStandardMaterial color="#f1edff" roughness={0.4} metalness={0.25} />
+          <meshStandardMaterial color="#f3f5ff" roughness={0.4} metalness={0.25} />
         </RoundedBox>
         {[-0.45, -0.15, 0.15, 0.45].map((z) => (
           <mesh key={z} position={[0.8, 0.55, z]} castShadow>
             <boxGeometry args={[0.1, 0.7, 0.1]} />
-            <meshStandardMaterial color="#ddd5fa" roughness={0.45} metalness={0.3} />
+            <meshStandardMaterial color="#cdd4ff" roughness={0.45} metalness={0.3} />
           </mesh>
         ))}
         {[-0.4, 0, 0.4].map((x) => (
           <group key={x} position={[x, 1.05, 0]}>
             <mesh position={[0, 0.16, 0]} castShadow>
               <cylinderGeometry args={[0.06, 0.09, 0.32, 14]} />
-              <meshStandardMaterial color="#e2dafc" roughness={0.3} metalness={0.2} />
+              <meshStandardMaterial color="#e4e8ff" roughness={0.3} metalness={0.2} />
             </mesh>
             <mesh position={[0, 0.34, 0]}>
               <sphereGeometry args={[0.055, 12, 12]} />
-              <meshStandardMaterial color="#5b31c8" roughness={0.3} metalness={0.6} />
+              <meshStandardMaterial color={ENERGY.grid.deep} roughness={0.3} metalness={0.6} />
             </mesh>
           </group>
         ))}
         <mesh position={[-0.2, 0.62, 0.535]}>
           <boxGeometry args={[0.5, 0.22, 0.01]} />
-          <meshBasicMaterial color="#5b31c8" />
+          <meshBasicMaterial color={ENERGY.grid.deep} />
         </mesh>
         <mesh position={[-0.2, 0.62, 0.542]}>
           <boxGeometry args={[0.34, 0.03, 0.004]} />
-          <meshBasicMaterial color="#cdbdff" toneMapped={false} />
+          <meshBasicMaterial color={ENERGY.grid.soft} toneMapped={false} />
         </mesh>
       </group>
 
       {/* Transformer → tower jumper */}
-      <Line points={jumper} color="#9d86e8" lineWidth={1.2} />
+      <Line points={jumper} color={ENERGY.grid.soft} lineWidth={1.2} />
 
       <Pylon />
     </group>

@@ -28,7 +28,7 @@ export function SoilingView() {
   const modulePowerW = (snapshot.systems[index].powerKw * 1000) / cfg.modules;
 
   return (
-    <div data-accent="dust" className="space-y-6">
+    <div className="space-y-6">
       <SoilingSummary />
 
       <SystemChips systems={soiling.systems} selected={index} onSelect={selectSystem} />

@@ -87,9 +87,10 @@
 
 /* ------------------------------------------------------------------ */
 /* Accent scopes                                                       */
-/* Each energy source has its own colour. Wrapping a page or a widget  */
-/* in data-accent="…" re-maps the brand ramp for everything inside it, */
-/* so icon tiles, bars, badges, rings and hover states all follow.     */
+/* The platform chrome (sidebar, topbar, cards, buttons) stays brand   */
+/* blue. Wrapping a *data* widget in data-accent="…" re-maps brand-*   */
+/* inside it so KPI tiles, 3D chips and energy-coded rows follow the   */
+/* source they show. Never put data-accent on a page.                  */
 /* ------------------------------------------------------------------ */
 :root {
   --accent-rgb: 25 82 235;
@@ -143,20 +144,20 @@
   --color-brand-950: #042b1f;
 }
 
-/* Utility grid — network violet */
+/* Utility grid — indigo, next to the brand blue */
 [data-accent="grid"] {
-  --accent-rgb: 133 89 245;
-  --color-brand-50: #f6f4ff;
-  --color-brand-100: #ede9ff;
-  --color-brand-200: #ddd5ff;
-  --color-brand-300: #c4b6ff;
-  --color-brand-400: #a68bff;
-  --color-brand-500: #8559f5;
-  --color-brand-600: #6f3fe6;
-  --color-brand-700: #5b31c8;
-  --color-brand-800: #4a2aa0;
-  --color-brand-900: #3c267e;
-  --color-brand-950: #26164f;
+  --accent-rgb: 91 108 245;
+  --color-brand-50: #f3f5ff;
+  --color-brand-100: #e4e8ff;
+  --color-brand-200: #cdd4ff;
+  --color-brand-300: #a8b4ff;
+  --color-brand-400: #7b8cff;
+  --color-brand-500: #5b6cf5;
+  --color-brand-600: #4f63e8;
+  --color-brand-700: #3f4ec9;
+  --color-brand-800: #3442a1;
+  --color-brand-900: #2f3c80;
+  --color-brand-950: #1c2450;
 }
 
 /* Module soiling — sand */

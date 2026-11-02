@@ -102,7 +102,7 @@ export function PvForecast({
   const clearShare = day.pvEnergyKwh / CLEAR_SKY_KWH;
 
   return (
-    <Card data-accent="solar" className={className}>
+    <Card className={className}>
       <CardHeader
         title="PV production forecast"
         subtitle={`${label} · hourly fleet output with confidence range`}
